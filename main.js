@@ -20,13 +20,28 @@ function mostrarMenu() {
     // ESCRIBE TU CÓDIGO AQUÍ
 }
 
-
-// =========================================================
-// BLOQUE 3: LÓGICA DE DEPÓSITOS Y RETIROS
-// Tareas: Realizar cálculos de saldo y validar montos ingresados.
-// =========================================================
 function procesarTransaccion(tipo) {
-    // ESCRIBE TU CÓDIGO AQUÍ
+    const texto = tipo === "deposito" ? "ingresar" : "retirar";
+    
+    rl.question(`\nIndica el monto a ${texto}: $`, (monto) => {
+        const valor = parseFloat(monto);
+
+        if (isNaN(valor) || valor <= 0) {
+            console.log("Error: Monto no válido.");
+        } else if (tipo === "retiro" && valor > saldoActual) {
+            console.log("Error: Fondos insuficientes.");
+        } else {
+            if (tipo === "deposito") {
+                saldoActual += valor;
+                console.log(`Has depositado $${valor}.`);
+            } else {
+                saldoActual -= valor;
+                console.log(`Has retirado $${valor}.`);
+            }
+            console.log(`Saldo resultante: $${saldoActual}`);
+        }
+        mostrarMenu();
+    });
 }
 
 
