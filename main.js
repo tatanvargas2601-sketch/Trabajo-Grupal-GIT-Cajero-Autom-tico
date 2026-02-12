@@ -3,15 +3,25 @@ const rl = readline.createInterface({ input: process.stdin, output: process.stdo
 let saldoActual = 1000;
 const PIN_SISTEMA = "1234";
 
-// =========================================================
-// BLOQUE 1: GESTIÓN DE ACCESO (LOGIN)
-// Tareas: Validar PIN, contar intentos y bloquear acceso.
-// =========================================================
 function flujoLogin() {
-    // ESCRIBE TU CÓDIGO AQUÍ
+    rl.question("Introduce tu PIN de 4 dígitos: ", (pin) => {
+        if (pin === PIN_SISTEMA) {
+            console.log("\n Acceso concedido.");
+            intentosFallidos = 0;
+            mostrarMenu();
+        } else {
+            intentosFallidos++;
+            const restantes = 3 - intentosFallidos;
+            if (restantes > 0) {
+                console.log(`PIN incorrecto. Te quedan ${restantes} intentos.`);
+                flujoLogin();
+            } else {
+                console.log("Cuenta bloqueada.");
+                rl.close();
+            }
+        }
+    });
 }
-
-
 // =========================================================
 // BLOQUE 2: MENÚ E INTERACCIÓN DE USUARIO
 // Tareas: Mostrar opciones visuales y capturar la entrada del usuario.
