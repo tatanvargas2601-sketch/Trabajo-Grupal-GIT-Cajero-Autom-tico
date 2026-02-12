@@ -35,7 +35,9 @@ function procesarTransaccion(tipo) {
 // Tareas: Mostrar saldo actual y finalizar la sesión de forma segura.
 // =========================================================
 function finalizarSesion() {
-    // ESCRIBE TU CÓDIGO AQUÍ
+    console.log("\nCerrando sesión...");
+    console.log("¡Gracias por usar nuestro cajero!");
+    rl.close();
 }
 
 
